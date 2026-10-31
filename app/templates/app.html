@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+{% block body_class %}page-app{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ static }}/css/chat.css">
+{% endblock %}
+{% block content %}
+{% set me_name = user.display_name or user.username %}
+<div class="kapp" id="app"
+     data-user-id="{{ user.id }}"
+     data-username="{{ user.username }}"
+     data-role="{{ user.role }}"
+     data-demo-mode="{{ 'true' if demo_mode else 'false' }}">
+
+  <!-- ===== Colonne gauche ===== -->
+  <aside class="kside" aria-label="Navigation de la messagerie">
+    <div class="kside-head">
+      <div class="me">
+        <span class="avatar" aria-hidden="true">{{ me_name[:2] | upper }}</span>
+        <div class="me-txt">
+          <strong>{{ me_name }}</strong>
+          <span class="mono muted">@{{ user.username }}</span>
+        </div>
+      </div>
+      <div class="head-actions">
+        {% if user.role == 'admin' %}<a class="icon-btn" href="/admin" title="Administration" aria-label="Administration">⚙</a>{% endif %}
+        {% if user.role == 'attaquant' and demo_mode %}<a class="icon-btn" href="/eve" title="Espace attaquant" aria-label="Espace attaquant">👁</a>{% endif %}
+        <button type="button" class="icon-btn" data-action="open-settings" title="Mon profil et paramètres" aria-label="Mon profil et paramètres">☰</button>
+      </div>
+    </div>
+    <p class="algo-badge mono" id="algo-badge" hidden></p>
+    <p class="conn-status" id="conn-status" role="status" hidden></p>
+    <div class="kside-cta">
+      <button type="button" class="btn btn-primary btn-block" id="btn-new-message" data-action="new-message">✎ Nouveau message</button>
+    </div>
+
+    <div class="ktabs" role="tablist" aria-label="Sections">
+      <button type="button" role="tab" class="ktab" id="tab-chats" data-action="tab" data-tab="chats" aria-selected="true" aria-controls="pane-chats">Discussions<span class="count" id="count-chats" hidden></span></button>
+      <button type="button" role="tab" class="ktab" id="tab-rooms" data-action="tab" data-tab="rooms" aria-selected="false" aria-controls="pane-rooms">Salons</button>
+      <button type="button" role="tab" class="ktab" id="tab-people" data-action="tab" data-tab="people" aria-selected="false" aria-controls="pane-people">Membres</button>
+      <button type="button" role="tab" class="ktab" id="tab-requests" data-action="tab" data-tab="requests" aria-selected="false" aria-controls="pane-requests">Demandes<span class="count" id="count-requests" hidden></span></button>
+    </div>
+
+    <section class="kpane" id="pane-chats" role="tabpanel" aria-labelledby="tab-chats">
+      <div class="online-strip" id="online-strip" hidden>
+        <h3 class="pane-sub">En ligne</h3>
+        <div class="strip" id="online-list"></div>
+      </div>
+      <ul class="klist" id="conv-list" aria-label="Vos discussions"></ul>
+      <div class="empty" id="conv-empty" hidden>
+        <p>Aucune discussion pour l'instant.</p>
+        <button type="button" class="btn btn-ghost" data-action="new-message">Écrire à un membre</button>
+      </div>
+      <div class="pane-foot">
+        <button type="button" class="btn btn-ghost btn-block" data-action="new-group">＋ Nouveau groupe</button>
+      </div>
+    </section>
+
+    <section class="kpane" id="pane-rooms" role="tabpanel" aria-labelledby="tab-rooms" hidden>
+      <p class="pane-hint">Les salons sont ouverts à tous. Rejoignez-en un pour discuter.</p>
+      <ul class="klist" id="rooms-list" aria-label="Salons"></ul>
+    </section>
+
+    <section class="kpane" id="pane-people" role="tabpanel" aria-labelledby="tab-people" hidden>
+      <div class="pane-search">
+        <label class="sr-only" for="people-search">Rechercher un membre</label>
+        <input type="search" id="people-search" placeholder="Rechercher : pseudo, nom, domaine…" autocomplete="off">
+      </div>
+      <p class="pane-hint" id="people-count"></p>
+      <ul class="klist" id="people-list" aria-label="Membres"></ul>
+    </section>
+
+    <section class="kpane" id="pane-requests" role="tabpanel" aria-labelledby="tab-requests" hidden>
+      <h3 class="pane-sub">Reçues</h3>
+      <ul class="klist" id="req-in"></ul>
+      <h3 class="pane-sub">Envoyées</h3>
+      <ul class="klist" id="req-out"></ul>
+      <h3 class="pane-sub">Mes contacts</h3>
+      <ul class="klist" id="req-ok"></ul>
+    </section>
+  </aside>
+
+  <!-- ===== Zone principale ===== -->
+  <section class="kmain" aria-label="Conversation">
+    <div class="khome" id="home">
+      <div class="khome-card">
+        <div class="empty-icon mono" aria-hidden="true">▮</div>
+        <h2>Bienvenue {{ me_name }} 👋</h2>
+        <p class="muted">Écrivez à n'importe quel membre inscrit, ou passez dire bonjour dans <strong>#général</strong>.</p>
+        <div class="home-actions">
+          <button type="button" class="btn btn-primary" data-action="new-message">✎ Nouveau message</button>
+          <button type="button" class="btn btn-ghost" data-action="open-general">Ouvrir #général</button>
+          <button type="button" class="btn btn-ghost" data-action="tab" data-tab="rooms">Parcourir les salons</button>
+        </div>
+        <h3 class="pane-sub">Membres en ligne</h3>
+        <div class="strip strip-wrap" id="home-online"></div>
+      </div>
+    </div>
+
+    <div class="kchat" id="chat" hidden>
+      <header class="kchat-head">
+        <button type="button" class="icon-btn back" data-action="back" aria-label="Retour à la liste" title="Retour">←</button>
+        <span class="avatar" id="chat-avatar" aria-hidden="true"></span>
+        <div class="kchat-title">
+          <h2 id="chat-title">—</h2>
+          <p class="muted" id="chat-sub"></p>
+        </div>
+        <button type="button" class="icon-btn" data-action="toggle-search" aria-label="Rechercher dans la conversation" title="Rechercher">🔍</button>
+      </header>
+      <div class="msg-search-bar" id="msg-search-bar" hidden>
+        <label class="sr-only" for="msg-search">Rechercher dans la conversation</label>
+        <input type="search" id="msg-search" placeholder="Rechercher dans cette conversation…" autocomplete="off">
+      </div>
+      <div class="conv-secret" id="conv-secret" hidden>
+        <p id="conv-secret-msg"></p>
+        <form id="conv-secret-form" class="conv-secret-form">
+          <label class="sr-only" for="conv-secret-input">Code partagé</label>
+          <input type="password" id="conv-secret-input" autocomplete="off" placeholder="Code partagé">
+          <button class="btn btn-primary" type="submit">Valider</button>
+        </form>
+      </div>
+      <div class="kmsgs" id="chat-msgs" role="log" aria-live="polite"></div>
+      <p class="typing-hint" id="typing-hint" hidden></p>
+      <div class="composer-extra">
+        <div class="reply-bar" id="reply-bar" hidden>
+          <span id="reply-preview"></span>
+          <button type="button" class="icon-btn sm" data-action="cancel-reply" aria-label="Annuler la réponse">✕</button>
+        </div>
+        <div class="file-chip" id="file-chip" hidden>
+          <span id="file-name"></span>
+          <button type="button" class="icon-btn sm" data-action="clear-file" aria-label="Retirer le fichier">✕</button>
+        </div>
+        <div class="emoji-pal" id="emoji-pal" hidden>
+          {% for e in ['😀','😂','😍','👍','👏','🙏','🎉','🔥','❤️','😮','😢','🤔','✅','🚀','💡','👀'] %}
+          <button type="button" class="emoji-btn" data-action="insert-emoji" data-emoji="{{ e }}">{{ e }}</button>
+          {% endfor %}
+        </div>
+      </div>
+      <form class="composer" id="chat-form" novalidate>
+        <button type="button" class="icon-btn" data-action="attach" aria-label="Joindre un fichier" title="Joindre un fichier">📎</button>
+        <input type="file" id="file-input" class="sr-only" tabindex="-1" accept="image/*,.pdf,.txt,.zip,.md">
+        <button type="button" class="icon-btn" data-action="toggle-emoji" aria-label="Insérer un emoji" title="Emoji">😊</button>
+        <label class="sr-only" for="chat-input">Message</label>
+        <textarea id="chat-input" rows="1" maxlength="4000" placeholder="Écrire un message…" enterkeyhint="send"></textarea>
+        <button type="submit" class="btn btn-primary" id="chat-send">Envoyer</button>
+      </form>
+      <p class="composer-hint">Entrée pour envoyer · Maj+Entrée pour aller à la ligne</p>
+    </div>
+  </section>
+
+  <!-- ===== Nouveau message : sélecteur de destinataire ===== -->
+  <dialog id="newmsg-dlg" class="dlg dlg-picker" aria-labelledby="newmsg-title">
+    <div class="dlg-head">
+      <h2 id="newmsg-title">Nouveau message</h2>
+      <button type="button" class="icon-btn" data-action="close-dialog" aria-label="Fermer">✕</button>
+    </div>
+    <div class="dlg-search">
+      <label class="sr-only" for="newmsg-search">Rechercher un membre</label>
+      <input type="search" id="newmsg-search" placeholder="À : pseudo, nom ou domaine…" autocomplete="off">
+    </div>
+    <p class="pane-hint" id="newmsg-count"></p>
+    <ul class="klist pick-list" id="newmsg-list" role="listbox" aria-label="Membres"></ul>
+  </dialog>
+
+  <!-- ===== Nouveau groupe ===== -->
+  <dialog id="group-dlg" class="dlg dlg-picker" aria-labelledby="group-title">
+    <form id="group-form" class="dlg-form" novalidate>
+      <div class="dlg-head">
+        <h2 id="group-title">Nouveau groupe</h2>
+        <button type="button" class="icon-btn" data-action="close-dialog" aria-label="Fermer">✕</button>
+      </div>
+      <label class="field">Nom du groupe<input name="title" id="group-name" maxlength="80" placeholder="ex. Projet hackathon"></label>
+      <label class="field">Ajouter des membres<input type="search" id="group-search" placeholder="Filtrer…" autocomplete="off"></label>
+      <p class="pane-hint" id="group-selected">Aucun membre sélectionné.</p>
+      <ul class="klist pick-list" id="group-list" aria-label="Membres"></ul>
+      <div class="dlg-actions">
+        <button type="button" class="btn btn-ghost" data-action="close-dialog">Annuler</button>
+        <button type="submit" class="btn btn-primary">Créer le groupe</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ===== Paramètres du compte ===== -->
+  <dialog id="settings-dlg" class="dlg" aria-labelledby="settings-title">
+    <form id="settings-form" class="dlg-form" novalidate>
+      <div class="dlg-head">
+        <h2 id="settings-title">Mon profil</h2>
+        <button type="button" class="icon-btn" data-action="close-dialog" aria-label="Fermer">✕</button>
+      </div>
+      <label class="field">Nom affiché<input name="display_name" maxlength="64" value="{{ user.display_name or '' }}"></label>
+      <label class="field">Bio<textarea name="bio" maxlength="500" rows="3">{{ user.bio or '' }}</textarea></label>
+      <label class="field">Domaine
+        <select name="domain">
+          {% for key, label in domains.items() %}
+          <option value="{{ key }}" {% if user.domain == key %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="field">Compétences (séparées par des virgules)<input name="skills" placeholder="python, fastapi"></label>
+      <label class="field">GitHub<input name="github" placeholder="https://github.com/…"></label>
+      <label class="field">Portfolio<input name="portfolio" placeholder="https://…"></label>
+      <label class="field">Photo de profil<input type="file" name="avatar" accept="image/*"></label>
+      <details class="field">
+        <summary>Changer de mot de passe</summary>
+        <label class="field">Mot de passe actuel<input type="password" name="current" autocomplete="current-password"></label>
+        <label class="field">Nouveau mot de passe<input type="password" name="new_password" autocomplete="new-password"></label>
+      </details>
+      <p class="form-msg" id="settings-msg" role="status" hidden></p>
+      <div class="dlg-actions">
+        <button type="button" class="btn btn-ghost danger" data-action="delete-account">Supprimer mon compte</button>
+        <button type="button" class="btn btn-ghost" data-action="close-dialog">Fermer</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ===== Boîte de saisie / confirmation (remplace prompt/confirm) ===== -->
+  <dialog id="ask-dlg" class="dlg" aria-labelledby="ask-title">
+    <form id="ask-form" class="dlg-form" novalidate>
+      <h2 id="ask-title"></h2>
+      <p id="ask-text" class="muted"></p>
+      <textarea id="ask-input" rows="3" hidden></textarea>
+      <div class="dlg-actions">
+        <button type="button" class="btn btn-ghost" data-action="ask-cancel">Annuler</button>
+        <button type="submit" class="btn btn-primary" id="ask-ok">OK</button>
+      </div>
+    </form>
+  </dialog>
+</div>
+<div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+<div class="boot-fail" id="boot-fail" role="alert" hidden>
+  <strong>La messagerie n'a pas pu démarrer.</strong>
+  <span id="boot-fail-detail">Rechargez la page avec Ctrl+Maj+R (vide le cache).</span>
+  <button type="button" class="btn btn-primary" onclick="location.reload()">Recharger</button>
+</div>
+<audio id="notify-sound" preload="none" src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2teleQgATpzV5KxhEwNHpdn1s2QWB0iq3fmyZxYHS6vf+bJnFgdLrN/5smcWB0us3/myZxYHS6zf+bJnFgdLrN/5smcWB0us3/myZxYH"></audio>
+{% endblock %}
+{% block scripts %}
+<script>
+  /* Filet de sécurité (script classique, s'exécute même si le module échoue) :
+     si l'application ne signale pas son démarrage, on l'explique à l'utilisateur. */
+  (function () {
+    var firstError = "";
+    window.addEventListener("error", function (e) {
+      if (!firstError) firstError = (e && (e.message || (e.target && e.target.src))) || "";
+    }, true);
+    setTimeout(function () {
+      if (window.__kernelReady) return;
+      var box = document.getElementById("boot-fail");
+      if (!box) return;
+      if (firstError) document.getElementById("boot-fail-detail").textContent =
+        "Rechargez la page avec Ctrl+Maj+R. Détail technique : " + firstError;
+      box.hidden = false;
+    }, 8000);
+  })();
+</script>
+<script type="module" src="{{ static }}/js/app.js"></script>
+{% endblock %}

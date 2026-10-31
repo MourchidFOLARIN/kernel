@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% set seo = c.seo %}
+{% block content %}
+<section class="section page-hero">
+  <div class="container">
+    <p class="kicker mono">à propos</p>
+    <h1>{{ c.title }}</h1>
+    <p class="lead">{{ c.mission }}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Valeurs</h2>
+    <div class="cards cards-3">
+      {% for v in c.valeurs %}
+      <article class="card"><h3>{{ v.title }}</h3><p>{{ v.text }}</p></article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">{{ c.team_title }}</h2>
+    <div class="cards cards-2">
+      {% for m in c.team %}
+      <article class="card team-card">
+        <div class="avatar mono" aria-hidden="true">{{ m.name[0] }}</div>
+        <div>
+          <h3>{{ m.name }}</h3>
+          <p class="muted">{{ m.role }}</p>
+          {% if m.link %}<a href="{{ m.link }}">Contact</a>{% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

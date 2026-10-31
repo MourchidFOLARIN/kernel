@@ -1,0 +1,26 @@
+.eve-wrap { padding-top: 1.5rem; }
+.eve-wrap h1, .tools-title { color: var(--accent); }
+.eve-top { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin: 1rem 0; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.break { word-break: break-all; }
+.eve-key .mono { font-size: .8rem; margin: .3rem 0; }
+.eve-key #eve-key { color: var(--danger); }
+.switch { display: flex; align-items: center; gap: .6rem; cursor: pointer; margin-bottom: .75rem; }
+.switch input { width: 1.1rem; height: 1.1rem; }
+.held-list { list-style: none; padding: 0; margin: 0; max-height: 220px; overflow: auto; }
+.held-list li { border: 1px solid var(--border); border-radius: 8px; padding: .5rem; margin-bottom: .5rem; font-size: .85rem; }
+.held-list .mono { word-break: break-all; display: block; color: var(--accent-2); margin: .25rem 0; }
+.held-list input { width: 100%; font-family: var(--mono); font-size: .8rem; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: .35rem; margin: .25rem 0; }
+.eve-feed { max-height: 320px; overflow: auto; font-family: var(--mono); font-size: .78rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: .75rem; }
+.feed-row { padding: .3rem 0; border-bottom: 1px solid var(--border); }
+.feed-row .t { color: var(--muted); }
+.feed-row .alg { color: var(--accent); }
+.feed-row .ct { color: var(--accent-2); word-break: break-all; }
+.feed-row.tampered { color: var(--danger); }
+.eve-tools { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.tool.wide { grid-column: 1 / -1; }
+.tool input, .tool select { width: 100%; font-family: var(--mono); font-size: .8rem; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: .5rem; margin: .35rem 0; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.tool-out { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: .5rem; max-height: 200px; overflow: auto; white-space: pre-wrap; word-break: break-all; font-size: .78rem; }
+.ecb-view { display: flex; flex-wrap: wrap; gap: 3px; margin: .5rem 0; }
+.ecb-block { width: 26px; height: 26px; border-radius: 4px; border: 1px solid var(--border); }

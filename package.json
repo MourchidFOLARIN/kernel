@@ -1,0 +1,14 @@
+{
+  "name": "kernel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:crypto": "node --test tests/js/crypto.test.mjs",
+    "test:multiuser": "node tools/e2e-multiuser.mjs",
+    "test:audit": "node tools/audit-buttons.mjs",
+    "test:keys": "node tools/e2e-keys.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^23.0.0"
+  }
+}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block head %}<link rel="stylesheet" href="{{ static }}/css/eve.css">{% endblock %}
+{% block content %}
+<section class="section eve-wrap" id="eve-app"
+         data-csrf="{{ csrf }}" data-intercept="{{ 'true' if intercept else 'false' }}">
+  <div class="container">
+    <p class="kicker mono">eve · interception réseau</p>
+    <h1>Espace attaquant</h1>
+    <p class="muted">Tout ce que le serveur voit passer. Démonstration sur réseau local, participants informés.</p>
+
+    <div class="eve-top">
+      <div class="card eve-key">
+        <h2>Réglages observés</h2>
+        <p class="mono" id="eve-algo">algo : {{ settings.algo }} / {{ settings.mode }}</p>
+        <p class="mono" id="eve-dist">distribution : {{ settings.key_distribution }}</p>
+        <p class="mono break" id="eve-key">clé diffusée : {{ settings.broadcast_key_hex if settings.key_distribution == 'broadcast' else '— (non diffusée)' }}</p>
+      </div>
+      <div class="card eve-intercept">
+        <h2>Interception</h2>
+        <label class="switch">
+          <input type="checkbox" id="intercept-toggle" {% if intercept %}checked{% endif %}>
+          <span>Retenir les messages au lieu de les relayer</span>
+        </label>
+        <ul id="held-list" class="held-list"><li class="muted">Aucun message retenu.</li></ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flex-between">
+        <h2>Flux en direct</h2>
+        <button type="button" class="btn btn-ghost" id="clear-feed">Vider</button>
+      </div>
+      <div class="eve-feed" id="eve-feed"><p class="muted">En attente de trafic…</p></div>
+    </div>
+
+    <h2 class="tools-title">Outils d'attaque</h2>
+    <div class="eve-tools">
+      <article class="card tool">
+        <h3>César / Vigenère</h3>
+        <input id="classic-hex" placeholder="chiffré hex (algo César/Vigenère)" class="mono">
+        <div class="btn-row">
+          <button class="btn btn-ghost" id="btn-caesar" type="button">Brute force César</button>
+          <button class="btn btn-ghost" id="btn-vigenere" type="button">Vigenère</button>
+        </div>
+        <pre class="tool-out mono" id="classic-out"></pre>
+      </article>
+
+      <article class="card tool">
+        <h3>Motifs ECB</h3>
+        <input id="ecb-hex" placeholder="chiffré hex (AES/DES-ECB)" class="mono">
+        <div class="btn-row"><button class="btn btn-ghost" id="btn-ecb" type="button">Analyser les blocs</button></div>
+        <div class="ecb-view" id="ecb-view"></div>
+        <p class="mono" id="ecb-msg"></p>
+      </article>
+
+      <article class="card tool">
+        <h3>Réutilisation de nonce</h3>
+        <input id="nonce-a" placeholder="chiffré A hex (CTR/ChaCha)" class="mono">
+        <input id="nonce-b" placeholder="chiffré B hex" class="mono">
+        <div class="btn-row"><button class="btn btn-ghost" id="btn-nonce" type="button">XOR des deux</button></div>
+        <pre class="tool-out mono" id="nonce-out"></pre>
+      </article>
+
+      <article class="card tool">
+        <h3>Effet d'avalanche</h3>
+        <input id="ava-a" placeholder="chiffré A hex" class="mono">
+        <input id="ava-b" placeholder="chiffré B hex (1 caractère changé)" class="mono">
+        <div class="btn-row"><button class="btn btn-ghost" id="btn-ava" type="button">Comparer</button></div>
+        <pre class="tool-out mono" id="ava-out"></pre>
+      </article>
+
+      <article class="card tool wide">
+        <h3>Force brute DES (clé réduite 24 bits)</h3>
+        <p class="muted">Pour la démo : les 5 premiers octets de la clé sont connus (00…), seuls 3 octets varient.</p>
+        <div class="grid2">
+          <input id="des-iv" placeholder="IV hex (CBC)" class="mono">
+          <select id="des-mode"><option value="CBC">DES-CBC</option><option value="ECB">DES-ECB</option></select>
+        </div>
+        <input id="des-cipher" placeholder="chiffré hex" class="mono">
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btn-des" type="button">Lancer</button>
+          <button class="btn btn-ghost" id="btn-des-stop" type="button">Stop</button>
+        </div>
+        <pre class="tool-out mono" id="des-out"></pre>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ static }}/js/eve.js"></script>{% endblock %}

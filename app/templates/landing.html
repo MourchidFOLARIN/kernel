@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% set seo = c.seo %}
+{% block content %}
+<section class="section page-hero">
+  <div class="container">
+    <p class="kicker mono">{{ c.kicker }}</p>
+    <h1>{{ c.title }}</h1>
+    <p class="lead">{{ c.text }}</p>
+    <a class="btn btn-primary" href="/rejoindre?domaine={{ c.domain }}">Rejoindre · {{ domains.get(c.domain, '') }}</a>
+  </div>
+</section>
+<section class="section">
+  <div class="container two-col">
+    <div>
+      <h2>Salons concernés</h2>
+      <ul class="room-mini">
+        {% for r in rooms %}
+        <li><span class="mono">{{ r.room.title }}</span> — {{ r.room.description }}</li>
+        {% else %}
+        <li class="muted">Les salons apparaîtront ici.</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <h2>Sujets types</h2>
+      <ol class="topics">
+        {% for t in c.topics %}<li>{{ t }}</li>{% endfor %}
+      </ol>
+    </div>
+  </div>
+</section>
+{% endblock %}

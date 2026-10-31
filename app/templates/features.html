@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% set seo = c.seo %}
+{% block content %}
+<section class="section page-hero">
+  <div class="container">
+    <p class="kicker mono">fonctionnalités</p>
+    <h1>{{ c.title }}</h1>
+    <p class="lead">{{ c.intro }}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container feature-list">
+    {% for item in c.liste %}
+    <article class="feature-row" id="{{ item.id }}">
+      <div>
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.text }}</p>
+      </div>
+      <pre class="feature-visual mono" aria-hidden="true">{{ item.visual }}</pre>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

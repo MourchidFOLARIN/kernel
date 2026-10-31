@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% set seo = c.seo %}
+{% block content %}
+<section class="section">
+  <div class="container narrow auth-box">
+    <p class="kicker mono">inscription</p>
+    <h1>{{ c.title }}</h1>
+    <p class="lead">{{ c.intro }}</p>
+    <form class="form" id="join-form" data-form="register">
+      <input type="hidden" name="csrf_token" value="{{ csrf }}">
+      <label>Pseudo
+        <input name="username" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_.\-]+" autocomplete="username">
+      </label>
+      <label>E-mail
+        <input type="email" name="email" required maxlength="254" autocomplete="email">
+      </label>
+      <label>Mot de passe
+        <input type="password" name="password" required minlength="8" maxlength="128" autocomplete="new-password" data-pw-strength>
+        <div class="pw-meter" aria-hidden="true"><span></span></div>
+        <p class="pw-hint muted mono" data-pw-hint>Min. 8 caractères, une lettre et un chiffre.</p>
+      </label>
+      <label>Domaine d'intérêt
+        <select name="domain">
+          {% for key, label in domains.items() %}
+          <option value="{{ key }}" {% if preselect == key %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <p class="form-msg" role="status" hidden></p>
+      <button class="btn btn-primary" type="submit">{{ c.submit }}</button>
+    </form>
+    <p class="muted">{{ c.has_account }} <a href="/connexion">Se connecter</a></p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ static }}/js/forms.js"></script>{% endblock %}

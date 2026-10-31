@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% set seo = c.seo %}
+{% block content %}
+<section class="section page-hero">
+  <div class="container narrow">
+    <p class="kicker mono">contact</p>
+    <h1>{{ c.title }}</h1>
+    <p class="lead">{{ c.intro }}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container narrow">
+    <form class="form" id="contact-form" data-form="contact">
+      <input type="hidden" name="csrf_token" value="{{ csrf }}">
+      <div class="hp" aria-hidden="true">
+        <label>Site web<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <label>{{ c.labels.name }}
+        <input name="name" required maxlength="80" autocomplete="name">
+      </label>
+      <label>{{ c.labels.email }}
+        <input type="email" name="email" required maxlength="254" autocomplete="email">
+      </label>
+      <label>{{ c.labels.subject }}
+        <input name="subject" required maxlength="120">
+      </label>
+      <label>{{ c.labels.body }}
+        <textarea name="body" required minlength="5" maxlength="5000" rows="6"></textarea>
+      </label>
+      <p class="form-msg" role="status" hidden></p>
+      <button class="btn btn-primary" type="submit">{{ c.labels.submit }}</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ static }}/js/forms.js"></script>{% endblock %}

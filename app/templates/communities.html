@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% set seo = c.seo %}
+{% block content %}
+<section class="section page-hero">
+  <div class="container">
+    <p class="kicker mono">communautés</p>
+    <h1>{{ c.title }}</h1>
+    <p class="lead">{{ c.intro }}</p>
+    <div class="filters" role="group" aria-label="Filtrer par domaine">
+      <a class="chip {% if not active %}active{% endif %}" href="/communautes">{{ c.filter_all }}</a>
+      {% for d in filters %}
+      <a class="chip {% if active == d %}active{% endif %}" href="/communautes?domaine={{ d }}">{{ domains[d] }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    {% if rooms %}
+    <div class="cards cards-2">
+      {% for r in rooms %}
+      <article class="card room-card">
+        <div class="room-head">
+          <h2 class="mono">{{ r.room.title }}</h2>
+          <span class="badge">{{ r.members }} membre{{ 's' if r.members != 1 else '' }}</span>
+        </div>
+        <p>{{ r.room.description }}</p>
+        {% if r.room.domain %}<span class="chip chip-sm">{{ domains.get(r.room.domain, r.room.domain) }}</span>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">{{ c.empty }}</p>
+    {% endif %}
+    <p class="center" style="margin-top:2rem">
+      <a class="btn btn-primary" href="/rejoindre">Rejoindre pour participer</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

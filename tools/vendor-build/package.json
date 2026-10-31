@@ -1,0 +1,1 @@
+{"name":"kernel-vendor-build","private":true,"type":"module","dependencies":{"@noble/ciphers":"^2.4.0","@noble/curves":"^2.4.0","esbuild":"^0.28.2","node-forge":"^1.4.2"}}

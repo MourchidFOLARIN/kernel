@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% set seo = seo %}
+{% block content %}
+<section class="section">
+  <div class="container prose narrow">
+    {{ body }}
+    {% if extra is defined %}{{ extra }}{% endif %}
+  </div>
+</section>
+{% endblock %}

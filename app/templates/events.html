@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% set seo = c.seo %}
+{% block content %}
+<section class="section page-hero">
+  <div class="container">
+    <p class="kicker mono">événements</p>
+    <h1>{{ c.title }}</h1>
+    <p class="lead">{{ c.intro }}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    {% if events %}
+    <div class="cards cards-2">
+      {% for e in events %}
+      <article class="card">
+        <span class="badge">{{ c.kinds.get(e.kind, e.kind) }}</span>
+        <h2>{{ e.title }}</h2>
+        <p class="mono muted">{{ e.starts_at.strftime('%d/%m/%Y %H:%M') }} UTC</p>
+        <p>{{ e.description }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <div class="empty-icon mono" aria-hidden="true">{ }</div>
+      <h2>{{ c.empty_title }}</h2>
+      <p>{{ c.empty_text }}</p>
+      <a class="btn btn-ghost" href="/contact">{{ c.empty_cta }}</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

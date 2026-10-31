@@ -1,0 +1,15 @@
+{
+  "seo": {"title": "À propos — Kernel", "description": "La mission, les valeurs et l'équipe derrière Kernel."},
+  "title": "À propos",
+  "mission": "Kernel rassemble celles et ceux qui construisent le numérique — code, infrastructure, données, modèles, sécurité — pour échanger sans filtre marketing ni bruit inutile.",
+  "valeurs": [
+    {"title": "Partage", "text": "On publie ce qu'on apprend. Une réponse aujourd'hui, c'est une heure gagnée pour quelqu'un demain."},
+    {"title": "Respect", "text": "Toutes les questions sont légitimes. Les débutants sont les bienvenus."},
+    {"title": "Éthique", "text": "Les compétences techniques s'utilisent dans un cadre légal, avec autorisation."}
+  ],
+  "team_title": "L'équipe",
+  "team": [
+    {"name": "Mourchid", "role": "Fondateur & administrateur", "photo": "", "link": ""},
+    {"name": "Équipe de modération", "role": "Bénévoles de la communauté", "photo": "", "link": "/contact"}
+  ]
+}

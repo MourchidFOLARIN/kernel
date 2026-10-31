@@ -1,0 +1,29 @@
+{
+  "dev": {
+    "seo": {"title": "Kernel pour les développeurs", "description": "Discutez code, architecture et outils avec d'autres développeurs."},
+    "kicker": "// pour les développeurs",
+    "title": "Votre prochain bug a sûrement déjà été résolu ici.",
+    "text": "Revues de code, choix d'architecture, outils du quotidien : échangez avec des devs de tous niveaux.",
+    "domain": "dev",
+    "rooms": ["general", "dev-web", "python", "entraide", "projets"],
+    "topics": ["Monolithe ou microservices pour un projet perso ?", "Vos alias et dotfiles indispensables", "Comment structurer un projet FastAPI qui grandit"]
+  },
+  "cybersecurite": {
+    "seo": {"title": "Kernel pour la cybersécurité", "description": "Un espace pour les passionnés et pros de la cybersécurité, dans un cadre éthique."},
+    "kicker": "// pour la cybersécurité",
+    "title": "Partagez vos méthodes, pas vos cibles.",
+    "text": "CTF, pentest, blue team, veille : discutez techniques et outils dans un cadre légal et éthique.",
+    "domain": "cyber",
+    "rooms": ["cybersecurite", "entraide", "projets", "offres-et-opportunites"],
+    "topics": ["Retour d'expérience sur votre dernier CTF", "Monter un homelab pour s'entraîner légalement", "Les outils de votre première semaine en SOC"]
+  },
+  "data-ia": {
+    "seo": {"title": "Kernel pour la data et l'IA", "description": "Data scientists et ingénieurs IA : modèles, données et mise en production."},
+    "kicker": "// pour la data et l'IA",
+    "title": "Des données aux modèles, sans tourner en rond.",
+    "text": "Nettoyage, visualisation, entraînement, déploiement : confrontez vos approches avec la communauté.",
+    "domain": "data",
+    "rooms": ["data-science", "ia", "python", "projets"],
+    "topics": ["pandas, polars ou DuckDB pour 10 Go de CSV ?", "Évaluer un LLM sur un cas métier", "Vos astuces pour des notebooks reproductibles"]
+  }
+}

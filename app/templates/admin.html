@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block head %}<link rel="stylesheet" href="{{ static }}/css/admin.css">{% endblock %}
+{% block content %}
+<section class="section admin-wrap" id="admin-app" data-csrf="{{ csrf }}">
+  <div class="container">
+    <p class="kicker mono">administration</p>
+    <h1>Tableau de bord</h1>
+    <div class="admin-stats">
+      <div class="stat"><div class="stat-n mono" id="st-online">{{ stats.online }}</div><div class="stat-l">en ligne</div></div>
+      <div class="stat"><div class="stat-n mono" id="st-users">{{ stats.users }}</div><div class="stat-l">comptes</div></div>
+      <div class="stat"><div class="stat-n mono" id="st-msgs">{{ stats.messages }}</div><div class="stat-l">messages</div></div>
+      <div class="stat"><div class="stat-n mono" id="st-contact">{{ stats.contact_unread }}</div><div class="stat-l">contacts non lus</div></div>
+    </div>
+
+    <div class="admin-grid">
+      <!-- Réglages démo -->
+      <article class="card admin-card" id="demo-card">
+        <h2>Réglages de démo</h2>
+        <p class="muted mono" id="demo-current">algo={{ settings.algo }} · {{ settings.key_distribution }}</p>
+        <label>Algorithme
+          <select id="demo-algo">
+            {% for a in algos %}
+            <option value="{{ a }}" {% if a == settings.algo %}selected{% endif %}>{{ a }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>Distribution de la clé
+          <select id="demo-dist">
+            <option value="broadcast" {% if settings.key_distribution == 'broadcast' %}selected{% endif %}>Clé diffusée en clair</option>
+            <option value="password" {% if settings.key_distribution == 'password' %}selected{% endif %}>Mot de passe partagé</option>
+            <option value="x25519" {% if settings.key_distribution == 'x25519' %}selected{% endif %}>X25519 ECDH</option>
+          </select>
+        </label>
+        <p class="muted" id="dist-hint"></p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="btn-save-demo">Appliquer</button>
+          <button type="button" class="btn btn-ghost" id="btn-new-key">Nouvelle clé</button>
+          {% if demo_mode %}<button type="button" class="btn btn-ghost" id="btn-des-key" title="Pour la force brute d'Ève">Clé DES 24 bits</button>{% endif %}
+        </div>
+        <p class="mono break muted" id="key-preview">clé : {{ settings.broadcast_key_hex[:16] }}…</p>
+
+        <h3 style="margin-top:1.5rem">Mode présentation</h3>
+        <ol class="pres-list" id="pres-list">
+          {% for p in presentation %}
+          <li class="{% if p.step == settings.presentation_step %}active{% endif %}" data-step="{{ p.step }}">
+            {{ p.label }}{% if p.note %} <span class="muted">— {{ p.note }}</span>{% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="btn-pres-next">Étape suivante</button>
+          <button type="button" class="btn btn-ghost" id="btn-pres-reset">Recommencer</button>
+        </div>
+      </article>
+
+      <!-- Répartition algos -->
+      <article class="card admin-card">
+        <h2>Répartition par algorithme</h2>
+        <ul class="algo-bars" id="algo-bars">
+          {% for algo, n in stats.by_algo.items() %}
+          <li><span class="mono">{{ algo }}</span> <strong>{{ n }}</strong></li>
+          {% else %}
+          <li class="muted">Aucun message pour l'instant.</li>
+          {% endfor %}
+        </ul>
+      </article>
+
+      <!-- Membres -->
+      <article class="card admin-card wide">
+        <h2>Membres</h2>
+        <div class="table-wrap"><table class="admin-table" id="users-table">
+          <thead><tr><th>Pseudo</th><th>Rôle</th><th>État</th><th>Actions</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+      </article>
+
+      <!-- Salons -->
+      <article class="card admin-card">
+        <h2>Salons</h2>
+        <ul id="rooms-list" class="admin-list"></ul>
+        <form id="room-form" class="form compact">
+          <input name="title" placeholder="#nouveau" required>
+          <input name="slug" placeholder="slug" required>
+          <button class="btn btn-ghost" type="submit">Créer</button>
+        </form>
+      </article>
+
+      <!-- Événements -->
+      <article class="card admin-card">
+        <h2>Événements</h2>
+        <ul id="events-list" class="admin-list"></ul>
+        <form id="event-form" class="form compact">
+          <input name="title" placeholder="Titre" required>
+          <input name="starts_at" type="datetime-local" required>
+          <select name="kind"><option value="rencontre">Rencontre</option><option value="defi">Défi</option><option value="atelier">Atelier</option></select>
+          <button class="btn btn-ghost" type="submit">Créer</button>
+        </form>
+      </article>
+
+      <!-- Contact -->
+      <article class="card admin-card">
+        <h2>Messages de contact</h2>
+        <ul id="contact-list" class="admin-list"></ul>
+      </article>
+
+      <!-- Signalements -->
+      <article class="card admin-card">
+        <h2>Signalements</h2>
+        <ul id="reports-list" class="admin-list"><li class="muted">Aucun signalement.</li></ul>
+      </article>
+
+      <!-- Journal -->
+      <article class="card admin-card wide">
+        <h2>Journal d'activité</h2>
+        <ul id="activity-list" class="admin-list mono"></ul>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ static }}/js/admin.js"></script>{% endblock %}

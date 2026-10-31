@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% set seo = c.seo %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="kicker mono">$ {{ site.name | lower }} · communauté</p>
+      <h1>{{ c.hero.title }}</h1>
+      <p class="lead">{{ c.hero.subtitle }}</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/rejoindre">{{ c.hero.cta_primary }}</a>
+        <a class="btn btn-ghost" href="/communautes">{{ c.hero.cta_secondary }}</a>
+      </div>
+    </div>
+    <div class="terminal" aria-hidden="true">
+      <div class="terminal-bar"><span></span><span></span><span></span></div>
+      <pre class="terminal-body" data-typewriter>
+{% for line in c.hero.code_lines %}{{ line }}
+{% endfor %}</pre>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">{{ c.audience_title }}</h2>
+    <div class="cards cards-3">
+      {% for a in c.audience %}
+      <article class="card">
+        <div class="card-icon mono" aria-hidden="true">{{ a.icon }}</div>
+        <h3>{{ a.title }}</h3>
+        <p>{{ a.text }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">{{ c.features_title }}</h2>
+    <div class="cards cards-3">
+      {% for f in c.features %}
+      <article class="card card-soft">
+        <h3>{{ f.title }}</h3>
+        <p>{{ f.text }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">{{ c.preview_title }}</h2>
+    <div class="chat-mock" aria-hidden="true">
+      <aside class="chat-mock-side">
+        <div class="mono muted">salons</div>
+        <ul>
+          <li class="active">#général</li>
+          <li>#python</li>
+          <li>#cybersécurité</li>
+          <li>#entraide</li>
+        </ul>
+      </aside>
+      <div class="chat-mock-main">
+        <div class="chat-mock-head mono">#général</div>
+        <div class="chat-mock-msgs">
+          <div class="msg"><span class="msg-author">alice</span><span class="msg-body">Quelqu'un a un retour sur FastAPI + WebSockets ?</span></div>
+          <div class="msg"><span class="msg-author">bob</span><span class="msg-body">Oui — je te partage mon squelette ce soir.</span></div>
+          <div class="msg me"><span class="msg-author">vous</span><span class="msg-body">Parfait, je regarde ça.</span></div>
+        </div>
+        <div class="chat-mock-input mono muted">Écrire un message…</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">{{ c.stats_title }}</h2>
+    <div class="stats">
+      <div class="stat"><div class="stat-n mono">{{ stats.members }}</div><div class="stat-l">{{ c.stats_labels.members }}</div></div>
+      <div class="stat"><div class="stat-n mono">{{ stats.rooms }}</div><div class="stat-l">{{ c.stats_labels.rooms }}</div></div>
+      <div class="stat"><div class="stat-n mono">{{ stats.messages }}</div><div class="stat-l">{{ c.stats_labels.messages }}</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-final">
+  <div class="container center">
+    <h2>{{ c.cta_final.title }}</h2>
+    <p class="lead">{{ c.cta_final.text }}</p>
+    <a class="btn btn-primary" href="/rejoindre">{{ c.cta_final.button }}</a>
+  </div>
+</section>
+{% endblock %}

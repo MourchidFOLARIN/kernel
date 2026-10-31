@@ -1,0 +1,9 @@
+{
+  "seo": {"title": "Événements — Kernel", "description": "Rencontres, défis et ateliers de la communauté Kernel."},
+  "title": "Événements",
+  "intro": "Rencontres, défis et ateliers organisés par la communauté.",
+  "empty_title": "Rien de prévu… pour l'instant.",
+  "empty_text": "Les prochains événements apparaîtront ici. Une idée d'atelier ? Écrivez-nous.",
+  "empty_cta": "Proposer un événement",
+  "kinds": {"rencontre": "Rencontre", "defi": "Défi", "atelier": "Atelier"}
+}

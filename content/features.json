@@ -1,0 +1,14 @@
+{
+  "seo": {"title": "Fonctionnalités — Kernel", "description": "Messagerie temps réel, salons, partage de code, profils, annuaire, notifications et modération."},
+  "title": "Fonctionnalités",
+  "intro": "Tout ce qu'il faut pour discuter tech, sans superflu.",
+  "liste": [
+    {"id": "temps-reel", "title": "Messagerie en temps réel", "text": "Les messages arrivent instantanément. Indicateur « en train d'écrire », accusés de remise et de lecture.", "visual": "alice  ▸ tu as vu la PR ?\nbob    ▸ en train d'écrire…"},
+    {"id": "salons", "title": "Salons", "text": "Des salons ouverts par thème : rejoignez-les, quittez-les, suivez ce qui vous intéresse.", "visual": "#général  #python  #devops\n#ia  #entraide  #projets"},
+    {"id": "code", "title": "Code en Markdown", "text": "Blocs de code avec coloration syntaxique et bouton « copier ». Les mentions @pseudo préviennent les bonnes personnes.", "visual": "```python\nprint(\"hello, kernel\")\n```"},
+    {"id": "profils", "title": "Profils et compétences", "text": "Bio, domaine, compétences en étiquettes, liens GitHub et portfolio.", "visual": "@alice · Développement\n[python] [fastapi] [rust]"},
+    {"id": "annuaire", "title": "Annuaire", "text": "Trouvez des membres par domaine ou par compétence.", "visual": "filtre: domaine=cyber skill=forensic\n→ 3 résultats"},
+    {"id": "notifications", "title": "Notifications", "text": "Badges de non-lus, notifications dans l'onglet et sonores, que vous pouvez couper.", "visual": "(3) Kernel — #entraide"},
+    {"id": "moderation", "title": "Modération", "text": "Signalement d'un message ou d'un membre, file de modération traitée par l'équipe.", "visual": "signalement #42 → en cours d'examen"}
+  ]
+}

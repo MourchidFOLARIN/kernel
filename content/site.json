@@ -1,0 +1,21 @@
+{
+  "name": "Kernel",
+  "tagline": "Là où ceux qui construisent se retrouvent.",
+  "default_description": "Kernel, le réseau de discussion des développeurs, experts en cybersécurité, data scientists et ingénieurs IA.",
+  "nav": [
+    {"href": "/", "label": "Accueil"},
+    {"href": "/fonctionnalites", "label": "Fonctionnalités"},
+    {"href": "/communautes", "label": "Communautés"},
+    {"href": "/a-propos", "label": "À propos"},
+    {"href": "/faq", "label": "FAQ"}
+  ],
+  "footer": {
+    "about": "Un espace de discussion pour celles et ceux qui codent, cassent, analysent et entraînent.",
+    "columns": [
+      {"title": "Plateforme", "links": [{"href": "/fonctionnalites", "label": "Fonctionnalités"}, {"href": "/communautes", "label": "Communautés"}, {"href": "/evenements", "label": "Événements"}]},
+      {"title": "Métiers", "links": [{"href": "/dev", "label": "Développeurs"}, {"href": "/cybersecurite", "label": "Cybersécurité"}, {"href": "/data-ia", "label": "Data & IA"}]},
+      {"title": "Infos", "links": [{"href": "/a-propos", "label": "À propos"}, {"href": "/faq", "label": "FAQ"}, {"href": "/contact", "label": "Contact"}, {"href": "/regles", "label": "Règles & CGU"}, {"href": "/confidentialite", "label": "Confidentialité"}]}
+    ],
+    "beta": "Version bêta"
+  }
+}

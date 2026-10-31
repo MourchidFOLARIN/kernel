@@ -1,0 +1,36 @@
+{
+  "seo": {"title": "Kernel — Là où ceux qui construisent se retrouvent", "description": "Développeurs, experts en cybersécurité, data scientists, ingénieurs IA : échangez, apprenez et collaborez dans un seul espace."},
+  "hero": {
+    "title": "Là où ceux qui construisent se retrouvent.",
+    "subtitle": "Développeurs, experts en cybersécurité, data scientists, ingénieurs IA : échangez, apprenez et collaborez dans un seul espace.",
+    "cta_primary": "Rejoindre la communauté",
+    "cta_secondary": "Découvrir les salons",
+    "code_lines": [
+      "$ kernel join --as builder",
+      "> connexion à la communauté…",
+      "> salons : #python #devops #ia #cybersécurité",
+      "> 👋 bienvenue, prêt à construire ?"
+    ]
+  },
+  "audience_title": "Pour qui ?",
+  "audience": [
+    {"icon": "</>", "title": "Développement", "text": "Front, back, mobile, systèmes : du premier commit à la mise en prod."},
+    {"icon": "#!", "title": "Cybersécurité", "text": "Pentest, CTF, défense, forensic : partager ses méthodes dans un cadre éthique."},
+    {"icon": "∑", "title": "Data science", "text": "Notebooks, visualisation, statistiques et pipelines de données."},
+    {"icon": "λ", "title": "IA et machine learning", "text": "Modèles, entraînement, MLOps, LLM : de la théorie au déploiement."},
+    {"icon": "⚙", "title": "DevOps", "text": "CI/CD, conteneurs, cloud, observabilité : faire tourner ce qui a été construit."},
+    {"icon": "✎", "title": "Étudiants", "text": "Poser ses questions sans complexe, trouver un mentor, un stage, un projet."}
+  ],
+  "features_title": "Ce que vous y trouverez",
+  "features": [
+    {"title": "Salons thématiques", "text": "Un salon par sujet, rejoignez ceux qui vous parlent."},
+    {"title": "Messages privés et groupes", "text": "Discutez en tête-à-tête ou montez votre équipe."},
+    {"title": "Code avec coloration syntaxique", "text": "Collez un extrait, il reste lisible et copiable."},
+    {"title": "Entraide", "text": "Bloqué sur un bug ? Quelqu'un est déjà passé par là."},
+    {"title": "Projets et opportunités", "text": "Side-projects, hackathons, offres de stage et d'emploi."}
+  ],
+  "preview_title": "Un aperçu de l'interface",
+  "stats_title": "La communauté en chiffres",
+  "stats_labels": {"members": "membres", "rooms": "salons", "messages": "messages échangés"},
+  "cta_final": {"title": "Prêt à rejoindre la boucle ?", "text": "L'inscription prend moins d'une minute.", "button": "Créer mon compte"}
+}

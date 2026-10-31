@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% set seo = c.seo %}
+{% block content %}
+<section class="section">
+  <div class="container narrow auth-box">
+    <p class="kicker mono">mot de passe</p>
+    <h1>{{ c.title }}</h1>
+    <p class="lead">{{ c.intro }}</p>
+    <form class="form" id="forgot-form" data-form="forgot">
+      <input type="hidden" name="csrf_token" value="{{ csrf }}">
+      <label>Pseudo ou e-mail
+        <input name="username" required maxlength="254" autocomplete="username">
+      </label>
+      <p class="form-msg" role="status" hidden></p>
+      <button class="btn btn-primary" type="submit">Obtenir un code</button>
+    </form>
+    <form class="form" id="reset-form" data-form="reset" hidden>
+      <input type="hidden" name="csrf_token" value="{{ csrf }}">
+      <input type="hidden" name="username" id="reset-username">
+      <div class="code-box" id="code-box" hidden>
+        <p>{{ c.code_shown }}</p>
+        <p class="mono code-value" id="code-value"></p>
+      </div>
+      <label>Code à 6 chiffres
+        <input name="code" required pattern="\d{6}" maxlength="6" inputmode="numeric">
+      </label>
+      <label>Nouveau mot de passe
+        <input type="password" name="password" required minlength="8" maxlength="128" autocomplete="new-password" data-pw-strength>
+        <div class="pw-meter" aria-hidden="true"><span></span></div>
+      </label>
+      <p class="form-msg" role="status" hidden></p>
+      <button class="btn btn-primary" type="submit">Changer le mot de passe</button>
+    </form>
+    <p><a href="/connexion">Retour à la connexion</a></p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ static }}/js/forms.js"></script>{% endblock %}

@@ -1,0 +1,24 @@
+{
+  "seo": {"title": "FAQ — Kernel", "description": "Questions fréquentes : compte, règles, salons, signalement et suppression de compte."},
+  "title": "Questions fréquentes",
+  "sections": [
+    {"title": "Compte", "questions": [
+      {"q": "Comment créer un compte ?", "a": "Rendez-vous sur la page Rejoindre : un pseudo, un e-mail, un mot de passe et votre domaine d'intérêt suffisent."},
+      {"q": "J'ai oublié mon mot de passe.", "a": "Utilisez « Mot de passe oublié » sur la page de connexion. Un code de réinitialisation s'affiche à l'écran ; un administrateur peut aussi vous aider."},
+      {"q": "Puis-je changer de pseudo ?", "a": "Pas encore. Votre nom affiché, lui, est modifiable depuis votre profil."}
+    ]},
+    {"title": "Règles", "questions": [
+      {"q": "Quelles sont les règles ?", "a": "Respect, pas de contenu illégal, et une pratique éthique de la cybersécurité. Tout est détaillé sur la page Règles."}
+    ]},
+    {"title": "Salons", "questions": [
+      {"q": "Comment rejoindre un salon ?", "a": "Une fois connecté, ouvrez la liste des communautés et cliquez sur « Rejoindre ». Vous pouvez quitter un salon à tout moment."},
+      {"q": "Puis-je créer un salon ?", "a": "Les salons publics sont gérés par l'équipe. Vous pouvez en revanche créer des groupes privés."}
+    ]},
+    {"title": "Signalement d'abus", "questions": [
+      {"q": "Comment signaler un message ou un membre ?", "a": "Chaque message et chaque profil dispose d'une option « Signaler ». Le signalement arrive dans la file de modération."}
+    ]},
+    {"title": "Suppression de compte", "questions": [
+      {"q": "Comment supprimer mon compte ?", "a": "Depuis les paramètres du compte. Vous pouvez aussi passer par la page Contact."}
+    ]}
+  ]
+}

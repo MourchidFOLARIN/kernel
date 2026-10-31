@@ -1,0 +1,7 @@
+{
+  "seo": {"title": "Contact — Kernel", "description": "Une question, une idée, un problème ? Écrivez à l'équipe Kernel."},
+  "title": "Contact",
+  "intro": "Une question, une idée d'événement, un souci avec votre compte ? Laissez-nous un message.",
+  "success": "Message envoyé, merci ! L'équipe vous répondra dès que possible.",
+  "labels": {"name": "Nom", "email": "E-mail", "subject": "Sujet", "body": "Message", "submit": "Envoyer"}
+}

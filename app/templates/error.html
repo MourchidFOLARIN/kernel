@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ code }} — Kernel{% endblock %}
+{% block description %}Erreur {{ code }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container center empty-state">
+    <p class="mono error-code">{{ code }}</p>
+    <h1>{{ message }}</h1>
+    <a class="btn btn-primary" href="/">Retour à l'accueil</a>
+  </div>
+</section>
+{% endblock %}

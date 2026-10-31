@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ seo.title if seo is defined and seo.title else site.name }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ seo.description if seo is defined and seo.description else site.default_description }}{% endblock %}">
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta name="csrf-token" content="{{ csrf }}">
+  <meta name="theme-color" content="#0b1210">
+  <link rel="icon" type="image/svg+xml" href="{{ static }}/favicon.svg">
+  <link rel="stylesheet" href="{{ static }}/css/main.css">
+  <script src="{{ static }}/js/theme.js" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/" aria-label="{{ site.name }} — accueil">
+        <span class="logo-mark" aria-hidden="true">▮</span>
+        <span class="logo-text">{{ site.name }}</span>
+        <span class="logo-beta">bêta</span>
+      </a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-principale" data-nav-toggle>
+        <span class="sr-only">Menu</span>
+        <span aria-hidden="true">☰</span>
+      </button>
+      <nav id="nav-principale" class="site-nav" aria-label="Principale">
+        <ul>
+          {% for item in site.nav %}
+          <li><a href="{{ item.href }}" {% if path == item.href %}aria-current="page"{% endif %}>{{ item.label }}</a></li>
+          {% endfor %}
+        </ul>
+        <div class="nav-actions">
+          <button type="button" class="theme-toggle" data-theme-toggle title="Basculer le thème" aria-label="Basculer clair / sombre">◐</button>
+          {% if user %}
+            <a class="btn btn-ghost" href="/app">Mon espace</a>
+            <form class="inline" action="/api/auth/logout" method="post" data-logout>
+              <input type="hidden" name="csrf_token" value="{{ csrf }}">
+              <button type="submit" class="btn btn-ghost">Déconnexion</button>
+            </form>
+          {% else %}
+            <a class="btn btn-ghost" href="/connexion">Se connecter</a>
+            <a class="btn btn-primary" href="/rejoindre">Rejoindre</a>
+          {% endif %}
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="logo footer-logo"><span class="logo-mark" aria-hidden="true">▮</span>{{ site.name }}</div>
+        <p class="muted">{{ site.footer.about }}</p>
+      </div>
+      {% for col in site.footer.columns %}
+      <div>
+        <h2 class="footer-title">{{ col.title }}</h2>
+        <ul>
+          {% for link in col.links %}
+          <li><a href="{{ link.href }}">{{ link.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="container footer-bottom">
+      <span>{{ site.footer.beta }}</span>
+      <span class="mono muted">{{ site.name }} · communauté tech</span>
+    </div>
+  </footer>
+  <script type="module" src="{{ static }}/js/main.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
