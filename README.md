@@ -239,8 +239,10 @@ kernel/
 │   ├── css/ js/         # UI + crypto client + Eve/admin
 │   └── vendor/          # forge, noble-ciphers, noble-curves (ESM locaux)
 ├── content/             # Textes publics FR (sans vocabulaire crypto)
+├── docs/                # Guide de démo pas à pas (DEMONSTRATION.md) et captures
 ├── tests/               # pytest + tests/js
-├── tools/vendor-build/  # build one-shot des vendors
+├── tools/               # Scripts d'audit E2E et build des vendors
+├── crypto_atelier.py    # Script pédagogique autonome (de César à X25519 en Python)
 ├── run.py
 ├── requirements.txt
 └── README.md

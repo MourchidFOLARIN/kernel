@@ -33,6 +33,9 @@ Ce document détaille le déroulé complet d'un atelier ou d'une présentation t
 > [!IMPORTANT]
 > **Cadre éthique :** Cette démonstration s'exécute exclusivement sur un réseau local contrôlé (hotspot Wi-Fi dédié). Les participants doivent être informés que le trafic peut être intercepté à des fins pédagogiques.
 
+> [!TIP]
+> **Code Python pour vos camarades :** Le script autonome [`crypto_atelier.py`](../crypto_atelier.py) à la racine contient l'implémentation Python de tous ces algorithmes (César, Vigenère, RC4, DES, AES-ECB/CBC/GCM, ChaCha20, PBKDF2 et X25519) ainsi que des tests d'attaques prêts à l'emploi. Lancez-le directement avec `python crypto_atelier.py`.
+
 ---
 
 ## 2. Architecture de la démo & Rôles
@@ -306,3 +309,4 @@ Si vous présentez devant un public de spécialistes réseau ou sécurité :
 | Le port 3000 ne répond pas | Le pare-feu de l'ordinateur bloque les connexions entrantes. | Vérifier avec `sudo ufw allow 3000/tcp` (Linux) ou désactiver temporairement le pare-feu local pour le réseau privé. |
 | L'interface semble garder l'ancien algorithme | L'onglet du navigateur a perdu la connexion WebSocket. | L'application se reconnecte automatiquement sous 2 secondes ; si besoin, rafraîchir avec `Ctrl+Maj+R`. |
 | Remise à zéro complète après l'atelier | On souhaite repartir d'une base neuve pour la session suivante. | Couper le serveur (`Ctrl+C`), supprimer `kernel.db` et relancer `python run.py`. |
+
