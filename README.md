@@ -170,6 +170,9 @@ Chaque message porte `key_dist` + empreinte `key_fp` (8 hex de SHA-256 de la cl�
 
 ## Mode présentation (admin)
 
+> [!TIP]
+> Pour un conducteur complet étape par étape, la préparation réseau, les attaques et le minutage d'une session, consultez le guide dédié : **[Guide de démonstration de A à Z](docs/DEMONSTRATION.md)**.
+
 Dans `/admin` → **Étape suivante** :
 
 1. Clair (Aucun)  
