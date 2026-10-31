@@ -1,0 +1,23 @@
+================================================================================
+ RAPPORT DE GÉNÉRATION DES CODEMAPS (docs/CODEMAPS/)
+ Date : 2026-10-31
+================================================================================
+
+1. Fichiers de cartographie créés :
+   - docs/CODEMAPS/README.md       (~400 tokens) : Index général
+   - docs/CODEMAPS/architecture.md (~750 tokens) : Schéma système & flux de données
+   - docs/CODEMAPS/backend.md      (~850 tokens) : Routes REST & protocole WebSocket
+   - docs/CODEMAPS/frontend.md     (~800 tokens) : Templates, SPA & moteur crypto
+   - docs/CODEMAPS/data.md         (~850 tokens) : 21 tables SQLite & relations
+   - docs/CODEMAPS/dependencies.md (~700 tokens) : Dépendances Python & vendor JS
+
+2. Statistiques de la base de code analysée :
+   - Fichiers scannés : 130+
+   - Couverture backend : 15 routeurs FastAPI + 1 endpoint WebSocket
+   - Couverture frontend : 7 modules applicatifs + 12 modules cryptographiques
+   - Couverture données : 21 modèles SQLAlchemy avec intégrité SQLite activée
+
+3. Conformité :
+   - Tous les codemaps respectent le plafond cible (< 1000 tokens par fichier).
+   - Liens relatifs et absolus valides vers les composants du projet.
+================================================================================
