@@ -21,3 +21,4 @@
    - Tous les codemaps respectent le plafond cible (< 1000 tokens par fichier).
    - Liens relatifs et absolus valides vers les composants du projet.
 ================================================================================
+

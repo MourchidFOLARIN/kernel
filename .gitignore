@@ -8,3 +8,4 @@ kernel.db
 .DS_Store
 static/uploads/avatars/*
 !static/uploads/avatars/.gitkeep
+.agents/

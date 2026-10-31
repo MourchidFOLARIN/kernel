@@ -51,3 +51,4 @@ cd tools/vendor-build && npm install && node build.mjs
 | [`tools/e2e-multiuser.mjs`](file:///home/admin/Project/kernel/tools/e2e-multiuser.mjs) | Script E2E | Simule 3 utilisateurs réels simultanés sur mobile et desktop avec messagerie temps réel. |
 | [`tools/audit-buttons.mjs`](file:///home/admin/Project/kernel/tools/audit-buttons.mjs) | Script d'audit | Clique automatiquement chaque bouton et onglet du projet en 1280 px et 375 px pour traquer les clics sans effet. |
 | [`tools/e2e-keys.mjs`](file:///home/admin/Project/kernel/tools/e2e-keys.mjs) | Script E2E | Vérifie les trois modes de distribution des clés (broadcast, password, x25519). |
+

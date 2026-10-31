@@ -23,3 +23,4 @@ Bienvenue dans la documentation d'architecture condensée de **Kernel**. Ces doc
 2. **Autonomie totale en réseau local (LAN)** : Zéro appel à des CDN ou services cloud externes.
 3. **Monoprocessus avec état mémoire** : Le hub WebSocket et l'état d'interception d'Ève sont maintenus en mémoire vive par l'instance Uvicorn.
 4. **Intégrité stricte SQLite** : Les contraintes de clés étrangères sont systématiquement appliquées via `PRAGMA foreign_keys = ON;`.
+

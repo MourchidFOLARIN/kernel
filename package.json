@@ -3,12 +3,17 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:frontend": "node scripts/build-frontend.js",
     "test:crypto": "node --test tests/js/crypto.test.mjs",
     "test:multiuser": "node tools/e2e-multiuser.mjs",
     "test:audit": "node tools/audit-buttons.mjs",
     "test:keys": "node tools/e2e-keys.mjs"
   },
   "devDependencies": {
-    "puppeteer-core": "^23.0.0"
+    "esbuild": "^0.28.2",
+    "puppeteer-core": "^25.16.0"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
   }
 }

@@ -75,3 +75,4 @@ Requête HTTP / WS
 - **[`app/security.py`](file:///home/admin/Project/kernel/app/security.py)** : Sessions signées (itsdangerous), hachage de mot de passe (Argon2id), protection CSRF, limitation de débit (rate-limiting IP/pseudo).
 - **[`app/demo.py`](file:///home/admin/Project/kernel/app/demo.py)** : Singleton de configuration de la démo (`DemoSettings`), étapes de la présentation de 0 à 5, bascule de sécurité `DEMO_MODE`.
 - **[`app/ws/delivery.py`](file:///home/admin/Project/kernel/app/ws/delivery.py)** : Routage des messages avec vérification de l'interception active d'Ève.
+

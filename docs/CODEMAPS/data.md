@@ -62,3 +62,4 @@ Kernel persiste son état dans une base SQLite locale (`kernel.db`). Le serveur 
 - **Intégrité référentielle** : assurée à chaque connexion par le listener SQLAlchemy exécutant `PRAGMA foreign_keys = ON;`.
 - **Migrations légères (`_migrate()` dans `app/database.py`)** : vérifie la présence des colonnes récentes (ex: `key_dist`, `key_fp`) et exécute un `ALTER TABLE ADD COLUMN` si nécessaire, garantissant la compatibilité des bases existantes sans outil externe lourd.
 - **Peuplement initial (`app/seed.py`)** : création automatique et idempotente des 4 comptes de démonstration (`admin`, `eve`, `alice`, `bob`) et des 10 salons thématiques (#général, #python, #cybersécurité, etc.).
+

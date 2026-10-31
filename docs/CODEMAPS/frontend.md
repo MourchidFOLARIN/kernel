@@ -84,3 +84,4 @@ Tout le chiffrement et le déchiffrement s'effectue dans le navigateur avant env
 - **Zéro boîte native** : aucune utilisation de `alert()` ou `prompt()`. Remplacement par des toasts animés (`showToast()`) et des modals accessibles.
 - **Gestion des pannes réseau** : bandeau d'alerte automatique lors des coupures WebSocket avec reconnexion exponentielle (jusqu'à 8 s).
 - **Indicateurs de statut** : `🕓` (envoi), `✓` (reçu par le serveur), `✓✓` (remis au destinataire), `✓✓ vert` (lu).
+

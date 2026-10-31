@@ -75,3 +75,4 @@ Kernel est une plateforme de messagerie web pour communauté technique, doublée
    | 8. static/js/crypto/index.js: decrypt(frame, cle)
    | 9. Affichage de la bulle déchiffrée + tiroir « Coulisses »
 ```
+
