@@ -54,7 +54,7 @@ def rooms_with_counts(db: DbSession, domain: str | None = None):
     return [{"room": r, "members": n} for r, n in db.execute(q).all()]
 
 
-@router.get("/", response_class=HTMLResponse)
+@router.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
 def home(request: Request, db: DbSession = Depends(get_db), sess=Depends(current_session)):
     return render(request, "home.html", sess, c=load_json("home"), stats=site_stats(db))
 
